@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+struct NewsData: Decodable {
+    let articles: [Articles]
+}
+
+struct Articles: Decodable {
+    let description: String
+    let urlToImage: String
+}
