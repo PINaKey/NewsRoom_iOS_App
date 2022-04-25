@@ -33,14 +33,27 @@ class NewsViewController: UITableViewController {
         cell.label.text = newsData?.articles[indexPath.row].description
         
         if let imageURL =  newsData?.articles[indexPath.row].urlToImage {
-            //Create URL
-            let url = URL(fileURLWithPath: imageURL)
-            
-            //Fetch Image Data
-            if let data = try? Data(contentsOf: url){
-                //Create Image and update image view
-                 cell.newsImageView.image = UIImage(data: data)
-            }
+           //1. Create a URL
+           if let url = URL(string: imageURL){
+               
+               //2. Create A URLSession
+               let session = URLSession(configuration: .default)
+               
+               //3. Give URLSession a task
+               let task = session.dataTask(with: url) { (data, response, error) in
+                   if error != nil {
+                       print(error!)
+                       return
+                   }
+                   if let safeData = data {
+                    DispatchQueue.main.async {
+                        cell.newsImageView.image = UIImage(data: safeData)
+                    }
+                   }
+               }
+               //4. Start the task
+               task.resume()
+           }
         }
         return cell
     }
