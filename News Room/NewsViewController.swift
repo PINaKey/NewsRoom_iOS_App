@@ -30,7 +30,7 @@ class NewsViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! NewsCell
         
-        cell.label.text = newsData?.articles[indexPath.row].description
+        cell.label.text = newsData?.articles[indexPath.row].title
         
         if let imageURL =  newsData?.articles[indexPath.row].urlToImage {
            //1. Create a URL
