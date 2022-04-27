@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "NEWS ROOM.png",
+      "filename" : "News Room.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "NEWS ROOM@2x.png",
+      "filename" : "News Room@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "NEWS ROOM@3x.png",
+      "filename" : "News Room@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

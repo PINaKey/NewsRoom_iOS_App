@@ -18,7 +18,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Orange Background" translatesAutoresizingMaskIntoConstraints="NO" id="ax2-7T-pGo">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEWS ROOM" translatesAutoresizingMaskIntoConstraints="NO" id="TxQ-GS-NsC">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="News Room" translatesAutoresizingMaskIntoConstraints="NO" id="TxQ-GS-NsC">
                                 <rect key="frame" x="36.5" y="277.5" width="341" height="341"/>
                             </imageView>
                         </subviews>
@@ -42,7 +42,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NEWS ROOM" width="341" height="341"/>
+        <image name="News Room" width="341" height="341"/>
         <image name="Orange Background" width="341" height="341"/>
     </resources>
 </document>
