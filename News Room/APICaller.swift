@@ -8,27 +8,27 @@
 
 import Foundation
 
-protocol NewsServiceDelegate {
-    func didUpdateNews(_ newsService: NewsService, news: NewsData)
+protocol AppCallerDelegate {
+    func didUpdateNews(_ newsService: APICaller, news: NewsData)
     func didFailWithError(error: Error)
 }
 
-struct NewsService {
+class APICaller {
     
     let newsURL = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apikey=55c23c9f979d46e5bade55a65afca43b"
     
-    var delegate: NewsServiceDelegate?
+    var delegate: AppCallerDelegate?
     
     func performRequest(){
         
-        //1. Create a URL
-        if let url = URL(string: newsURL){
-            
-            //2. Create A URLSession
-            let session = URLSession(configuration: .default)
-            
-            //3. Give URLSession a task
-            let task = session.dataTask(with: url) { (data, response, error) in
+        //1. Create a URL - guard let is used to print error
+        guard let url = URL(string: newsURL) else {
+            print("Can't able to get news URL")
+            return
+        }
+        //2. Create A URLSession
+        //3. Give URLSession a task
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if error != nil {
                     self.delegate?.didFailWithError(error: error!)
                     return
@@ -41,7 +41,7 @@ struct NewsService {
             }
             //4. Start the task
             task.resume()
-        }
+        
     }
     
     func parseJSON(_ newsData: Data) -> NewsData? {

@@ -10,7 +10,7 @@ import UIKit
 
 class NewsViewController: UITableViewController {
     
-    var newsService = NewsService()
+    var newsService = APICaller()
     
     var newsData: NewsData?
 
@@ -32,41 +32,41 @@ class NewsViewController: UITableViewController {
         
         cell.label.text = newsData?.articles[indexPath.row].title
         
-        if let imageURL =  newsData?.articles[indexPath.row].urlToImage {
-           //1. Create a URL
-           if let url = URL(string: imageURL){
-               
-               //2. Create A URLSession
-               let session = URLSession(configuration: .default)
-               
-               //3. Give URLSession a task
-               let task = session.dataTask(with: url) { (data, response, error) in
-                   if error != nil {
-                       print(error!)
-                       return
-                   }
-                   if let safeData = data {
-                    DispatchQueue.main.async {
-                        cell.newsImageView.image = UIImage(data: safeData)
-                    }
-                   }
-               }
-               //4. Start the task
-               task.resume()
-           }
+        //If let chaining - To fetch image from Image URL
+        if let imageURL =  newsData?.articles[indexPath.row].urlToImage,
+           let url = URL(string: imageURL)
+        {
+            //2. Create A URLSession
+            //let session = URLSession(configuration: .default)
+            
+            //3. Give URLSession a task
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                if let safeData = data {
+                 DispatchQueue.main.async {
+                     cell.newsImageView.image = UIImage(data: safeData)
+                 }
+                }
+            }
+            //4. Start the task
+            task.resume()
         }
+        
         return cell
     }
 }
 
 //MARK: - NewsService Delegate Methods
 
-extension NewsViewController: NewsServiceDelegate {
+extension NewsViewController: AppCallerDelegate {
     func didFailWithError(error: Error) {
         print(error)
     }
     
-    func didUpdateNews(_ newsService: NewsService, news: NewsData) {
+    func didUpdateNews(_ newsService: APICaller, news: NewsData) {
         DispatchQueue.main.async {
             self.newsData = news
             self.tableView.reloadData()
